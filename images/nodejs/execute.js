@@ -1,16 +1,22 @@
+import { expect } from 'chai';
+
 function buildArguments(input) {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz';
   return input.map((_, index) => alphabet[index]);
 }
-function getFunctionBody(stringFn) {
-  return stringFn.match(/function\s+.+\(.*\)\s*\{(.+)\}/);
-}
 function judger(problemResult, userResult) {
-  const isCorrect = problemResult === userResult;
-
-  return {
-    isCorrect,
-  };
+  try {
+    expect(problemResult).deep.eq(userResult);
+    return {
+      isCorrect: true,
+    };
+  } catch (e) {
+    return {
+      isCorrect: false,
+      expected: e.expected,
+      actual: e.actual,
+    };
+  }
 }
 // input data
 const inputs = process.env.INPUT.split('\n');
@@ -19,13 +25,14 @@ const result = inputs.map((input) => {
   console.log({ problemContext });
 
   // Initialize
+  const problemArguments = buildArguments(problemContext);
   const problemAlgorithm = new Function(
-    ...buildArguments(problemContext),
-    getFunctionBody(process.env.PROBLEM_ALGORITHM)[1],
+    ...problemArguments,
+    `return (${process.env.PROBLEM_ALGORITHM})(${problemArguments.join(',')})`,
   );
   const userAlgorithm = new Function(
-    ...buildArguments(problemContext),
-    getFunctionBody(process.env.EXECUTABLE)[1],
+    ...problemArguments,
+    `return (${process.env.USER_ALGORITHM})(${problemArguments.join(',')})`,
   );
   return judger(
     problemAlgorithm(...problemContext),

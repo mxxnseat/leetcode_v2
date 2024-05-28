@@ -1,3 +1,3 @@
-export class JudgeEvent {
+export class JudgeSuccededEvent {
   constructor(public result: any) {}
 }

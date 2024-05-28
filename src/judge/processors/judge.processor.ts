@@ -4,9 +4,9 @@ import { Job } from 'bullmq';
 import { JUDGING_QUEUE_NAME } from '../constants';
 import { JudgePayload } from '../interfaces/judge.interface';
 import { EventBus } from '@nestjs/cqrs';
-import { JudgeEvent } from '../events/judge.event';
+import { JudgeSuccededEvent } from '../events/judge-succeded.event';
 import { ProblemService } from 'src/problem/services';
-import { error } from 'console';
+import { JudgeFailedEvent } from '../events';
 
 @Processor(JUDGING_QUEUE_NAME)
 export class JudgeProcessor extends WorkerHost {
@@ -23,6 +23,7 @@ export class JudgeProcessor extends WorkerHost {
     if (!problem) {
       return;
     }
+    const input = job.data.test_run ? job.data.input : problem.input;
     const { stderr, stdout, error } = await new Promise<{
       error: unknown;
       stdout: string;
@@ -31,8 +32,8 @@ export class JudgeProcessor extends WorkerHost {
       exec(
         `docker run --rm \
           -e PROBLEM_ALGORITHM="${problem.algorithm}" \
-          -e INPUT="${job.data.input}" \
-          -e EXECUTABLE="${job.data.code}" \
+          -e INPUT="${input}" \
+          -e USER_ALGORITHM="${job.data.code}" \
           leetcode_v2_node_v20
           `,
         (error, stdout, stderr) => {
@@ -40,15 +41,11 @@ export class JudgeProcessor extends WorkerHost {
         },
       );
     });
-    console.log({ stdout });
-    const res = stdout.match(/{"execution_result":\s*(.*)}/);
-    console.log('execution result', {
-      executionResult: res,
-      error,
-      stdout,
-      stderr,
-    });
-    this.eventBus.publish(new JudgeEvent({ result: res }));
+    const [, result] = stdout.match(/{"execution_result":\s*(.*)}/);
+    if (error || stderr) {
+      return this.eventBus.publish(new JudgeFailedEvent(error || stderr));
+    }
+    this.eventBus.publish(new JudgeSuccededEvent({ result }));
   }
 
   @OnWorkerEvent('completed')
@@ -58,6 +55,6 @@ export class JudgeProcessor extends WorkerHost {
 
   @OnWorkerEvent('error')
   public onError(reason: unknown) {
-    console.log(reason);
+    this.eventBus.publish(new JudgeFailedEvent(reason));
   }
 }

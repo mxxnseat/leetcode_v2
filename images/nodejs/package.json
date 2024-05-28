@@ -4,5 +4,8 @@
   "type": "module",
   "scripts": {
     "execute": "node ./execute.js"
+  },
+  "dependencies": {
+    "chai": "^5.1.1"
   }
 }

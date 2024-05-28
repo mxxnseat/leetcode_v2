@@ -10,6 +10,17 @@ export class ProblemRepository {
     this.store.push(record);
     return record;
   }
+  public update(
+    id: number,
+    payload: Partial<Omit<Problem, 'id'>>,
+  ): Problem | null {
+    let problem = this.retrieve(id);
+    if (!problem) {
+      return null;
+    }
+    problem = { ...problem, ...payload };
+    return problem;
+  }
   public list(): Problem[] {
     return this.store;
   }

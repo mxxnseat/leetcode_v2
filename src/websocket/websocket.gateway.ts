@@ -2,7 +2,7 @@ import { OnModuleInit } from '@nestjs/common';
 import { Saga, ofType } from '@nestjs/cqrs';
 import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { Observable, map } from 'rxjs';
-import { JudgeEvent } from 'src/judge';
+import { JudgeSuccededEvent } from 'src/judge';
 import { Server } from 'ws';
 
 @WebSocketGateway()
@@ -19,9 +19,11 @@ export class WebsocketGateway implements OnModuleInit {
   @Saga()
   public broadcastIncomingEvent($event: Observable<any>): any {
     return $event.pipe(
-      ofType(JudgeEvent),
+      ofType(JudgeSuccededEvent),
       map(({ result }) => {
-        this.server.clients.forEach((client) => client.send(result));
+        this.server.clients.forEach((client) =>
+          client.send(JSON.stringify(result)),
+        );
       }),
     );
   }

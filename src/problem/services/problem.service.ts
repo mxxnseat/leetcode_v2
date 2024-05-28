@@ -22,4 +22,8 @@ export class ProblemService {
   public retrieve(id: number): Problem | null {
     return this.problemRepository.retrieve(id);
   }
+
+  public update(id: number, payload: Partial<Problem>): Problem | null {
+    return this.problemRepository.update(id, payload);
+  }
 }
