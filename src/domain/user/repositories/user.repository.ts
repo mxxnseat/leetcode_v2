@@ -1,4 +1,4 @@
-import { Repository } from '@lib/database';
+import { Repository } from '@lib/database/decorators';
 import { PostgresRepository } from '@lib/database/repositories';
 import { User } from '../interfaces';
 

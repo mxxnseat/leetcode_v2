@@ -12,11 +12,10 @@ export class ProblemService {
   ) {}
 
   public async create(payload: Problem): Promise<Problem> {
-    const problemPayload = {
+    const problem = await this.problemRepository.create({
       ...payload,
       status: 'pending',
-    };
-    const problem = await this.problemRepository.create(problemPayload);
+    });
     this.eventBus.publish(new ProblemCreatedEvent(problem));
     return problem;
   }

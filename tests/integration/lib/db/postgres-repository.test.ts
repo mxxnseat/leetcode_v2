@@ -1,7 +1,8 @@
 import chaiExclude from 'chai-exclude';
 import { expect, use } from 'chai';
 import { Test } from '@nestjs/testing';
-import { KNEX, Repository } from '@lib/database';
+import { Repository } from '@lib/database/decorators';
+import { KNEX } from '@lib/database/constants';
 import { PostgresRepository } from '@lib/database/repositories';
 import { Knex } from 'knex';
 import { knexProvider } from '../../core/knex-provider';

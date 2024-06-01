@@ -23,7 +23,7 @@ export class JudgeProcessor extends WorkerHost {
     if (!problem) {
       return;
     }
-    const input = job.data.test_run ? job.data.input : problem.input;
+    const inputs = job.data.test_run ? job.data.input : problem.inputs;
     const { stderr, stdout, error } = await new Promise<{
       error: unknown;
       stdout: string;
@@ -32,7 +32,7 @@ export class JudgeProcessor extends WorkerHost {
       exec(
         `docker run --rm \
           -e PROBLEM_ALGORITHM="${problem.algorithm}" \
-          -e INPUT="${input}" \
+          -e INPUT="${inputs}" \
           -e USER_ALGORITHM="${job.data.code}" \
           leetcode_v2_node_v20
           `,
@@ -41,11 +41,14 @@ export class JudgeProcessor extends WorkerHost {
         },
       );
     });
-    const [, result] = stdout.match(/{"execution_result":\s*(.*)}/);
+    const matchResult = stdout.match(/{"execution_result":\s*(.*)}/);
+    if (!matchResult) {
+      return this.eventBus.publish(new JudgeFailedEvent('cannot find result'));
+    }
     if (error || stderr) {
       return this.eventBus.publish(new JudgeFailedEvent(error || stderr));
     }
-    this.eventBus.publish(new JudgeSuccededEvent({ result }));
+    this.eventBus.publish(new JudgeSuccededEvent({ result: matchResult[1] }));
   }
 
   @OnWorkerEvent('completed')

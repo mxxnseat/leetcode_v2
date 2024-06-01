@@ -1,6 +1,6 @@
 import { PostgresRepository } from '@lib/database/repositories';
 import { Problem } from '../interfaces';
-import { Repository } from '@lib/database';
+import { Repository } from '@lib/database/decorators';
 
-@Repository({ tableName: 'problems' })
-export class ProblemRepository extends PostgresRepository<any, any> {}
+@Repository({ tableName: 'problems', prefix: 'prb' })
+export class ProblemRepository extends PostgresRepository<Problem, Problem> {}
