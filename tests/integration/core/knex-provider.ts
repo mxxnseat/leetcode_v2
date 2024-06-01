@@ -1,6 +1,6 @@
 import knex from 'knex';
 import { Provider } from '@nestjs/common';
-import { KNEX } from '@lib/database';
+import { KNEX } from '@lib/database/constants';
 
 export const knexProvider: Provider = {
   provide: KNEX,

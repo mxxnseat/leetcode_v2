@@ -28,7 +28,7 @@ export abstract class PostgresRepository<R, E> implements CrudRepository<R, E> {
   }: ListRepositoryOptions<R> = {}): Promise<List<T>> {
     const qb = this.getQueryBuilder().select('*');
     qb.limit(limit).offset(page * limit);
-    if ('sort' in options) {
+    if (options.sort) {
       const [ascOrDescSymbol, ...sortColumn] = options.sort;
       if (ascOrDescSymbol !== '+' && ascOrDescSymbol !== '-') {
         throw new Error('Cannot parse sort param');
@@ -39,7 +39,7 @@ export abstract class PostgresRepository<R, E> implements CrudRepository<R, E> {
   }
   public async create(payload: OmitDefaultParameters<R>): Promise<R> {
     return this.getQueryBuilder()
-      .insert({ id: generateId(this.prefix), ...payload })
+      .insert({ id: generateId(this.prefix, 30), ...payload })
       .returning<E>('*') as R;
   }
   public async retrieve<T extends E = E>(id: string): Promise<Nullable<T>> {

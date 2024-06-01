@@ -1,9 +1,9 @@
 import { BullModule } from '@nestjs/bullmq';
 import { Module } from '@nestjs/common';
-import { JudgeController } from './controllers/judge.controller';
-import { JudgeProcessor } from './processors/judge.processor';
-import { JudgeService } from './services/judge.service';
-import { ProblemModule } from '@domain/problem';
+import { JudgeController } from './controllers';
+import { JudgeProcessor } from './processors';
+import { JudgeService } from './services';
+import { ProblemModule } from '@domain/problem/problem.module';
 
 @Module({
   imports: [

@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bullmq';
-import { JudgeModule } from './domain/judge';
-import { WebsocketModule } from './domain/websocket';
 import { CqrsModule } from '@nestjs/cqrs';
-import { ProblemModule } from './domain/problem';
-import { DatabaseModule } from './lib/database';
+import { DatabaseModule } from '@lib/database/database.module';
 import { UserModule } from '@domain/user/user.module';
+import { JudgeModule } from '@domain/judge/judge.module';
+import { ProblemModule } from '@domain/problem/problem.module';
+import { WebsocketModule } from '@domain/websocket/websocket.module';
 
 @Module({
   imports: [
