@@ -36,6 +36,10 @@ table "users" {
         null = true
         type = varchar(255)
     }
+    column "clerk_user_id" {
+        null = false
+        type = varchar(64)
+    }
     column "created_at" {
         null = false
         type = integer
@@ -106,5 +110,6 @@ table "problems" {
     foreign_key "created_by" {
         columns = [column.created_by]
         ref_columns = [table.users.column.id]
+        on_delete = CASCADE
     }
 }

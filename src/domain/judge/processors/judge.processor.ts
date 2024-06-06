@@ -19,7 +19,6 @@ export class JudgeProcessor extends WorkerHost {
 
   public async process(job: Job<JudgePayload>): Promise<any> {
     const problem = await this.problemService.retrieve(job.data.problem_id);
-    console.log({ problem });
     if (!problem) {
       return;
     }

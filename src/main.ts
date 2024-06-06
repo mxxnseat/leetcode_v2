@@ -6,6 +6,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { randomUUID } from 'crypto';
+import fastifyRequestContext from '@fastify/request-context';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -13,7 +14,14 @@ async function bootstrap() {
     new FastifyAdapter({
       genReqId: () => randomUUID(),
     }),
+    { rawBody: true },
   );
+  app.register(fastifyRequestContext as any, {
+    defaultStoreValues: {
+      user: null,
+      scopes: [],
+    },
+  });
   app.setGlobalPrefix('v1');
   app.useWebSocketAdapter(new WsAdapter(app));
   await app.listen(8080);

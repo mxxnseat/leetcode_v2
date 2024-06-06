@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../repositories';
-import { OmitDefaultParameters } from '@lib/database/types';
+import { OmitDefaultParameters } from '@lib/modules/database/types';
 import { User } from '../interfaces';
-import { List, ListRepositoryOptions } from '@lib/database/interfaces';
+import { List, ListRepositoryOptions } from '@lib/modules/database/interfaces';
 import { Nullable } from '@lib/types';
 
 @Injectable()
