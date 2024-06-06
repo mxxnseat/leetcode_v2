@@ -3,6 +3,7 @@ import { ProblemRepository } from '../repositories';
 import { EventBus } from '@nestjs/cqrs';
 import { Problem } from '../interfaces';
 import { ProblemCreatedEvent } from '../events';
+import { List, ListRepositoryOptions } from '@lib/modules/database/interfaces';
 
 @Injectable()
 export class ProblemService {
@@ -10,6 +11,11 @@ export class ProblemService {
     private readonly problemRepository: ProblemRepository,
     private readonly eventBus: EventBus,
   ) {}
+  public async list(
+    options: ListRepositoryOptions<Problem>,
+  ): Promise<List<Problem>> {
+    return this.problemRepository.list(options);
+  }
 
   public async create(payload: Problem): Promise<Problem> {
     const problem = await this.problemRepository.create({
@@ -29,5 +35,9 @@ export class ProblemService {
     payload: Partial<Problem>,
   ): Promise<Problem | null> {
     return this.problemRepository.update(id, payload);
+  }
+
+  public delete(id: string): Promise<Problem | null> {
+    return this.problemRepository.delete(id);
   }
 }

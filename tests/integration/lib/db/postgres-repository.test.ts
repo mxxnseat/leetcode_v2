@@ -1,11 +1,13 @@
 import chaiExclude from 'chai-exclude';
 import { expect, use } from 'chai';
 import { Test } from '@nestjs/testing';
-import { Repository } from '@lib/database/decorators';
-import { KNEX } from '@lib/database/constants';
-import { PostgresRepository } from '@lib/database/repositories';
+import { Repository } from '@lib/modules/database/decorators';
+import { KNEX } from '@lib/modules/database/constants';
+import { PostgresRepository } from '@lib/modules/database/repositories';
 import { Knex } from 'knex';
-import { knexProvider } from '../../core/knex-provider';
+import { DatabaseModule } from '@lib/modules/database/database.module';
+import { ConfigModule } from '@nestjs/config';
+import { databaseConfig } from '@config/database.config';
 
 use(chaiExclude);
 
@@ -35,7 +37,11 @@ describe('lib:db:postgres-repository', () => {
   let entityRepository: EntityRepository;
   before(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [knexProvider, EntityRepository],
+      imports: [
+        DatabaseModule,
+        ConfigModule.forRoot({ load: [databaseConfig], isGlobal: true }),
+      ],
+      providers: [EntityRepository],
     }).compile();
     knex = moduleRef.get(KNEX);
     entityRepository = moduleRef.get(EntityRepository);

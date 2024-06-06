@@ -17,11 +17,12 @@
     "outDir": "./dist",
     "paths": {
       "@domain/*": ["src/domain/*"],
-      "@lib/*": ["src/lib/*"]
+      "@lib/*": ["src/lib/*"],
+      "@config/*": ["src/config/*"]
     },
-    "types": ["reflect-metadata"],
+    "types": ["reflect-metadata", "mocha", "./src/types/index.d.ts"],
     "lib": ["es2019", "es2020"]
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "src/types/**/*", "tests/**/*"],
   "exclude": ["node_modules"]
 }

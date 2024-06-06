@@ -7,9 +7,7 @@
     "tests/**/*.test.ts"
   ],
   "reporter": [
-    "html",
     "lcov",
-    "text",
     "text-summary"
   ],
   "report-dir": "coverage"

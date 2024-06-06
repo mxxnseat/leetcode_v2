@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": ["mocha"]
+    "types": ["mocha", "./src/types/index.d.ts"]
   },
-  "include": ["./tests/**/*", "./src/**/*"]
+  "include": ["./tests/**/*", "./src/**/*", "src/types/**/*"]
 }

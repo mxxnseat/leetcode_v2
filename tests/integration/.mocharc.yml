@@ -2,6 +2,7 @@ extension: ts
 exit: true
 spec: 'tests/integration/**/*.test.ts'
 require:
-  - ts-node/register
+  - '@swc-node/register'
   - tsconfig-paths/register
   - source-map-support/register
+  - tests/integration/global-hooks.ts
