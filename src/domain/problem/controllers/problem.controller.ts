@@ -13,7 +13,7 @@ import {
 import { ProblemService } from '../services';
 import { AuthProtected, CurrentUser, Scopes } from '@domain/auth/decorators';
 import { User } from '@domain/user/interfaces';
-import { scopes } from '@config/scopes.config';
+import { scopes as leetcodeScopes } from '@config/scopes.config';
 import { List } from '@lib/modules/database/interfaces';
 import { NotFoundException } from '@lib/exception';
 import {
@@ -25,23 +25,36 @@ import {
 import { Schemas } from '@lib/modules/core/decorators/schemas.decorator';
 import { listResponseSchema } from '@lib/modules/core/schemas';
 import { UpdateProblemGuard } from '../guards';
+import { CurrentScopes } from '@domain/auth/decorators/current-scopes.decorator';
+import { ScopesService } from '@domain/auth/services';
 
 @Controller('problems')
 @AuthProtected()
 export class ProblemController {
-  constructor(private readonly problemService: ProblemService) {}
+  constructor(
+    private readonly scopesService: ScopesService,
+    private readonly problemService: ProblemService,
+  ) {}
 
   @Get()
-  @Scopes([scopes.problem.list])
+  @Scopes([leetcodeScopes.problem.list])
   @Schemas({
     response: listResponseSchema(problemDto),
   })
-  public async list(@Query() options): Promise<List<Problem>> {
-    return this.problemService.list(options);
+  public async list(
+    @Query() options,
+    @CurrentScopes() scopes: string[],
+  ): Promise<List<Problem>> {
+    if (
+      this.scopesService.verify([leetcodeScopes.problem.listPendings], scopes)
+    ) {
+      return this.problemService.list(options);
+    }
+    return this.problemService.list({ ...options, status: 'approved' });
   }
 
   @Post()
-  @Scopes([scopes.problem.create])
+  @Scopes([leetcodeScopes.problem.create])
   @Schemas({ body: createProblemBodyDto, response: problemDto })
   public async create(
     @Body() payload: Problem,
@@ -56,7 +69,7 @@ export class ProblemController {
   }
 
   @Get(':id_problem')
-  @Scopes([scopes.problem.retrieve])
+  @Scopes([leetcodeScopes.problem.retrieve])
   @Schemas({
     response: problemDto,
   })
@@ -72,7 +85,7 @@ export class ProblemController {
 
   @Patch(':id_problem')
   @UseGuards(UpdateProblemGuard)
-  @Scopes([scopes.problem.update])
+  @Scopes([leetcodeScopes.problem.update])
   @Schemas({
     body: updateProblemBodyDto,
     response: problemDto,
@@ -89,7 +102,7 @@ export class ProblemController {
   }
 
   @Delete(':id_problem')
-  @Scopes([scopes.problem.delete])
+  @Scopes([leetcodeScopes.problem.delete])
   @HttpCode(204)
   public async delete(@Param('id_problem') idProblem: string): Promise<void> {
     const problem = await this.problemService.delete(idProblem);
