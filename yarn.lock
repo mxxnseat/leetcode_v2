@@ -1034,6 +1034,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sinclair/typebox@npm:0.32.31":
+  version: 0.32.31
+  resolution: "@sinclair/typebox@npm:0.32.31"
+  checksum: 10c0/65a15a5cff3ad3b1ddc10f8d9c82d524a33af65ff0402fd3063fefba0416878c1e2f6c14cffec9cfabd8dbfac83e2ea4d4377ce7e2e94ae49be9055e15677064
+  languageName: node
+  linkType: hard
+
 "@sindresorhus/is@npm:^4.0.0":
   version: 4.6.0
   resolution: "@sindresorhus/is@npm:4.6.0"
@@ -1952,6 +1959,18 @@ __metadata:
     require-from-string: "npm:^2.0.2"
     uri-js: "npm:^4.2.2"
   checksum: 10c0/ac4f72adf727ee425e049bc9d8b31d4a57e1c90da8d28bcd23d60781b12fcd6fc3d68db5df16994c57b78b94eed7988f5a6b482fd376dc5b084125e20a0a622e
+  languageName: node
+  linkType: hard
+
+"ajv@npm:8.16.0":
+  version: 8.16.0
+  resolution: "ajv@npm:8.16.0"
+  dependencies:
+    fast-deep-equal: "npm:^3.1.3"
+    json-schema-traverse: "npm:^1.0.0"
+    require-from-string: "npm:^2.0.2"
+    uri-js: "npm:^4.4.1"
+  checksum: 10c0/6fc38aa8fd4fbfaa7096ac049e48c0cb440db36b76fef2d7d5b7d92b102735670d055d412d19176c08c9d48eaa9d06661b67e59f04943dc71ab1551e0484f88c
   languageName: node
   linkType: hard
 
@@ -4951,6 +4970,7 @@ __metadata:
     "@nestjs/schematics": "npm:9.0.0"
     "@nestjs/testing": "npm:10.3.8"
     "@nestjs/websockets": "npm:10.3.8"
+    "@sinclair/typebox": "npm:0.32.31"
     "@swc-node/register": "npm:1.9.1"
     "@swc/cli": "npm:0.3.12"
     "@swc/core": "npm:1.5.25"
@@ -4964,6 +4984,7 @@ __metadata:
     "@types/ws": "npm:8"
     "@typescript-eslint/eslint-plugin": "npm:7.11.0"
     "@typescript-eslint/parser": "npm:7.11.0"
+    ajv: "npm:8.16.0"
     bullmq: "npm:5.7.11"
     chai: "npm:4.4.1"
     chai-exclude: "npm:2.1.0"

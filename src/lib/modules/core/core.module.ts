@@ -1,5 +1,5 @@
 import { Global, Module } from '@nestjs/common';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorExceptionFilter, HttpExceptionFilter } from './filters';
 import { ConfigModule } from '@nestjs/config';
 import { BullmqConfig, bullmqConfig } from '@config/bullmq.config';
@@ -11,6 +11,7 @@ import { BullModule } from '@nestjs/bullmq';
 import { DatabaseModule } from '../database/database.module';
 import { ClerkModule } from '../clerk/clerk.module';
 import { scopesConfig } from '@config/scopes.config';
+import { ValidationInterceptor } from './interceptors';
 
 @Global()
 @Module({
@@ -38,6 +39,10 @@ import { scopesConfig } from '@config/scopes.config';
   providers: [
     { provide: APP_FILTER, useClass: HttpExceptionFilter },
     { provide: APP_FILTER, useClass: ErrorExceptionFilter },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ValidationInterceptor,
+    },
   ],
 })
 export class CoreModule {}
