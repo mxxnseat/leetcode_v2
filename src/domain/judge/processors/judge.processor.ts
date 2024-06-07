@@ -2,11 +2,11 @@ import { OnWorkerEvent, Processor, WorkerHost } from '@nestjs/bullmq';
 import { exec } from 'child_process';
 import { Job } from 'bullmq';
 import { JUDGING_QUEUE_NAME } from '../constants';
-import { JudgePayload } from '../interfaces/judge.interface';
 import { EventBus } from '@nestjs/cqrs';
 import { JudgeSuccededEvent } from '../events/judge-succeded.event';
 import { ProblemService } from '@domain/problem/services';
 import { JudgeFailedEvent } from '../events';
+import { CreateJudgeBody } from '../schemas';
 
 @Processor(JUDGING_QUEUE_NAME)
 export class JudgeProcessor extends WorkerHost {
@@ -17,7 +17,7 @@ export class JudgeProcessor extends WorkerHost {
     super();
   }
 
-  public async process(job: Job<JudgePayload>): Promise<any> {
+  public async process(job: Job<CreateJudgeBody>): Promise<any> {
     const problem = await this.problemService.retrieve(job.data.problem_id);
     if (!problem) {
       return;

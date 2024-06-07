@@ -1,6 +1,6 @@
 import { User } from '@domain/user/interfaces';
 import { knexManager } from './knex-provider';
-import { Problem } from '@domain/problem/interfaces';
+import { Problem } from '@domain/problem/schemas';
 
 export const userRepository = knexManager<User>('users');
 export const problemRepository = knexManager<Problem>('problems');

@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { Problem } from '@domain/problem/interfaces';
 import { getIdOrCreateResource, problemRepository } from '../core';
 import { createUser } from './user.seed';
+import { Problem } from '@domain/problem/schemas';
 
 export const createProblem = async (
   payload: Partial<Problem> = {},
@@ -15,7 +15,7 @@ export const createProblem = async (
       algorithm: faker.lorem.words(),
       created_by: idUser,
       inputs: '[]',
-      name: faker.lorem.word(),
+      title: faker.lorem.word(),
       status: 'pending',
       ...payload,
     })

@@ -57,7 +57,11 @@ export abstract class PostgresRepository<R, E> implements CrudRepository<R, E> {
     return result;
   }
   public async delete(id: string): Promise<Nullable<R>> {
-    return this.getQueryBuilder().del().where('id', id).returning('*') as R;
+    const [result] = await this.getQueryBuilder()
+      .del()
+      .where('id', id)
+      .returning('*');
+    return result;
   }
 
   private getQueryBuilder(): Knex.QueryBuilder {
