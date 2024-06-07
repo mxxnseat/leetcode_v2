@@ -6,6 +6,7 @@ export const scopes = {
     create: 'problems:create',
     retrieve: 'problems:retrieve',
     update: 'problems:update',
+    updateStatus: 'problems:update-status',
     delete: 'problems:delete',
   },
   judge: {
@@ -26,6 +27,7 @@ const userRole = [
 
 const adminRole = [
   ...userRole,
+  scopes.problem.updateStatus,
   scopes.judge.create,
   scopes.judge.list,
   scopes.judge.delete,

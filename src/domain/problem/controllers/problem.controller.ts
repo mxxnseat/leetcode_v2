@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ProblemService } from '../services';
 import { AuthProtected, CurrentUser, Scopes } from '@domain/auth/decorators';
@@ -23,6 +24,7 @@ import {
 } from '../schemas';
 import { Schemas } from '@lib/modules/core/decorators/schemas.decorator';
 import { listResponseSchema } from '@lib/modules/core/schemas';
+import { UpdateProblemGuard } from '../guards';
 
 @Controller('problems')
 @AuthProtected()
@@ -69,6 +71,7 @@ export class ProblemController {
   }
 
   @Patch(':id_problem')
+  @UseGuards(UpdateProblemGuard)
   @Scopes([scopes.problem.update])
   @Schemas({
     body: updateProblemBodyDto,

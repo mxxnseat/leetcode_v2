@@ -4,11 +4,12 @@ import { ProblemRepository } from './repositories';
 import { ProblemService } from './services';
 import { AuthModule } from '@domain/auth/auth.module';
 import { UserModule } from '@domain/user/user.module';
+import { UpdateProblemGuard } from './guards';
 
 @Module({
   imports: [UserModule, AuthModule],
   controllers: [ProblemController],
-  providers: [ProblemRepository, ProblemService],
+  providers: [ProblemRepository, ProblemService, UpdateProblemGuard],
   exports: [ProblemService],
 })
 export class ProblemModule {}
