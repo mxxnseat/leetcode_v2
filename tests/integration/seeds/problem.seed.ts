@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { getIdOrCreateResource, problemRepository } from '../core';
 import { createUser } from './user.seed';
 import { Problem } from '@domain/problem/schemas';
+import { generateId } from '@lib/modules/database/util';
 
 export const createProblem = async (
   payload: Partial<Problem> = {},
@@ -11,7 +12,7 @@ export const createProblem = async (
   );
   const [problem] = await problemRepository
     .insert({
-      id: faker.string.uuid(),
+      id: generateId('prb', 60),
       algorithm: faker.lorem.words(),
       description: faker.lorem.words(),
       created_by: idUser,

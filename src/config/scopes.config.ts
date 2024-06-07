@@ -3,6 +3,7 @@ import { ConfigType, registerAs } from '@nestjs/config';
 export const scopes = {
   problem: {
     list: 'problems:list',
+    listPendings: 'problems:list-pendings',
     create: 'problems:create',
     retrieve: 'problems:retrieve',
     update: 'problems:update',
@@ -28,6 +29,7 @@ const userRole = [
 const adminRole = [
   ...userRole,
   scopes.problem.updateStatus,
+  scopes.problem.listPendings,
   scopes.judge.create,
   scopes.judge.list,
   scopes.judge.delete,

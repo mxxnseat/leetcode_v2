@@ -24,12 +24,15 @@ export abstract class PostgresRepository<R, E> implements CrudRepository<R, E> {
   public async list<T extends E = E>({
     limit = 20,
     page = 0,
+    sort,
     ...options
   }: ListRepositoryOptions<R> = {}): Promise<List<T>> {
     const qb = this.getQueryBuilder().select('*');
-    qb.limit(limit).offset(page * limit);
-    if (options.sort) {
-      const [ascOrDescSymbol, ...sortColumn] = options.sort;
+    qb.where(options)
+      .limit(limit)
+      .offset(page * limit);
+    if (sort) {
+      const [ascOrDescSymbol, ...sortColumn] = sort;
       if (ascOrDescSymbol !== '+' && ascOrDescSymbol !== '-') {
         throw new Error('Cannot parse sort param');
       }
