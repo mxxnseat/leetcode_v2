@@ -13,6 +13,7 @@ export const createProblem = async (
     .insert({
       id: faker.string.uuid(),
       algorithm: faker.lorem.words(),
+      description: faker.lorem.words(),
       created_by: idUser,
       inputs: '[]',
       title: faker.lorem.word(),

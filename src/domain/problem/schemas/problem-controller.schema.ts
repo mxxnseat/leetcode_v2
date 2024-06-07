@@ -1,4 +1,5 @@
 import { Static, Type } from '@sinclair/typebox';
+import { problemStatus } from './problem.schema';
 
 export const createProblemBodyDto = Type.Object(
   {
@@ -10,10 +11,16 @@ export const createProblemBodyDto = Type.Object(
   { $id: 'create-problem-dto', additionalProperties: false },
 );
 
-export const updateProblemBodyDto = Type.Partial(createProblemBodyDto, {
-  $id: 'update-problem-dto',
-  additionalProperties: false,
-});
+export const updateProblemBodyDto = Type.Partial(
+  Type.Composite([
+    createProblemBodyDto,
+    Type.Object({ status: problemStatus }),
+  ]),
+  {
+    $id: 'update-problem-dto',
+    additionalProperties: false,
+  },
+);
 
 export type CreateProblemBody = Static<typeof createProblemBodyDto>;
-export type UpdateProblemBOdy = Static<typeof updateProblemBodyDto>;
+export type UpdateProblemBody = Static<typeof updateProblemBodyDto>;

@@ -1,6 +1,6 @@
 import {Type, type Static} from "@sinclair/typebox"
 
-const problemStatus = Type.Enum({pending: "pending", canceled: 'canceled', approved: 'approved'})
+export const problemStatus = Type.Enum({pending: "pending", canceled: 'canceled', approved: 'approved'})
 
 export const problemDto = Type.Object({
     id: Type.String(),
