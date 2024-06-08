@@ -1,2 +1,2 @@
-export * from './judge-failed.event';
-export * from './judge-succeded.event';
+export * from './judge-created.event';
+export * from './judge-updated.event';

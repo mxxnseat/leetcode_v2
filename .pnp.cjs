@@ -51,6 +51,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:18.16.12"],\
           ["@types/pg", "npm:8.11.6"],\
           ["@types/sinon", "npm:17.0.3"],\
+          ["@types/sinon-chai", "npm:3.2.12"],\
           ["@types/supertest", "npm:6.0.2"],\
           ["@types/ws", "npm:8.5.10"],\
           ["@typescript-eslint/eslint-plugin", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:7.11.0"],\
@@ -73,6 +74,7 @@ const RAW_RUNTIME_STATE =
           ["reflect-metadata", "npm:0.2.2"],\
           ["rxjs", "npm:7.2.0"],\
           ["sinon", "npm:18.0.0"],\
+          ["sinon-chai", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:3.7.0"],\
           ["source-map-support", "npm:0.5.20"],\
           ["supertest", "npm:7.0.0"],\
           ["svix", "npm:1.24.0"],\
@@ -2047,6 +2049,17 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/sinon", "npm:17.0.3"],\
           ["@types/sinonjs__fake-timers", "npm:8.1.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/sinon-chai", [\
+      ["npm:3.2.12", {\
+        "packageLocation": "../../.yarn/berry/cache/@types-sinon-chai-npm-3.2.12-e5e54ca97b-10c0.zip/node_modules/@types/sinon-chai/",\
+        "packageDependencies": [\
+          ["@types/sinon-chai", "npm:3.2.12"],\
+          ["@types/chai", "npm:4.3.16"],\
+          ["@types/sinon", "npm:17.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6152,6 +6165,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:18.16.12"],\
           ["@types/pg", "npm:8.11.6"],\
           ["@types/sinon", "npm:17.0.3"],\
+          ["@types/sinon-chai", "npm:3.2.12"],\
           ["@types/supertest", "npm:6.0.2"],\
           ["@types/ws", "npm:8.5.10"],\
           ["@typescript-eslint/eslint-plugin", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:7.11.0"],\
@@ -6174,6 +6188,7 @@ const RAW_RUNTIME_STATE =
           ["reflect-metadata", "npm:0.2.2"],\
           ["rxjs", "npm:7.2.0"],\
           ["sinon", "npm:18.0.0"],\
+          ["sinon-chai", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:3.7.0"],\
           ["source-map-support", "npm:0.5.20"],\
           ["supertest", "npm:7.0.0"],\
           ["svix", "npm:1.24.0"],\
@@ -8525,6 +8540,32 @@ const RAW_RUNTIME_STATE =
           ["diff", "npm:5.2.0"],\
           ["nise", "npm:6.0.0"],\
           ["supports-color", "npm:7.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["sinon-chai", [\
+      ["npm:3.7.0", {\
+        "packageLocation": "../../.yarn/berry/cache/sinon-chai-npm-3.7.0-8e6588805e-10c0.zip/node_modules/sinon-chai/",\
+        "packageDependencies": [\
+          ["sinon-chai", "npm:3.7.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:3.7.0", {\
+        "packageLocation": "./.yarn/__virtual__/sinon-chai-virtual-7b47f695ce/3/.yarn/berry/cache/sinon-chai-npm-3.7.0-8e6588805e-10c0.zip/node_modules/sinon-chai/",\
+        "packageDependencies": [\
+          ["sinon-chai", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:3.7.0"],\
+          ["@types/chai", "npm:4.3.16"],\
+          ["@types/sinon", "npm:17.0.3"],\
+          ["chai", "npm:4.4.1"],\
+          ["sinon", "npm:18.0.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/chai",\
+          "@types/sinon",\
+          "chai",\
+          "sinon"\
         ],\
         "linkType": "HARD"\
       }]\
