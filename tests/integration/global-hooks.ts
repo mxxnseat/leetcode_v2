@@ -1,3 +1,6 @@
+import * as chai from 'chai';
+import sinonChai from 'sinon-chai';
+import { createSandbox } from 'sinon';
 import * as supertest from 'supertest';
 import fastifyRequestContext from '@fastify/request-context';
 import {
@@ -9,17 +12,27 @@ import { clearAll } from './core';
 import { AppModule } from 'src/app.module';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { HttpExceptionFilter } from '@lib/modules/core/filters';
+import { EventBus } from '@lib/modules/cqrs/event-bus';
 
+chai.use(sinonChai);
+
+export let sinonSandbox = createSandbox();
 export let app: NestFastifyApplication;
 export let request: supertest.Agent;
 export const mochaHooks = {
   beforeAll: async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
-    app = moduleRef.createNestApplication(new FastifyAdapter(), {
-      rawBody: true,
     });
+    const stubEventBus = sinonSandbox.createStubInstance(EventBus);
+    moduleRef.overrideProvider(EventBus).useValue(stubEventBus);
+
+    app = (await moduleRef.compile()).createNestApplication(
+      new FastifyAdapter(),
+      {
+        rawBody: true,
+      },
+    );
     app.register(fastifyRequestContext as any, {
       defaultStoreValues: {
         user: null,
@@ -32,6 +45,12 @@ export const mochaHooks = {
     await app.getHttpAdapter().getInstance().ready();
     request = supertest.agent(app.getHttpAdapter().getInstance().server);
   },
-  after: () => app.close(),
-  afterEach: () => clearAll(),
+  after: async () => {
+    sinonSandbox.restore();
+    await app.close();
+  },
+  afterEach: async () => {
+    sinonSandbox.reset();
+    clearAll();
+  },
 };

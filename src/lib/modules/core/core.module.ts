@@ -6,12 +6,12 @@ import { BullmqConfig, bullmqConfig } from '@config/bullmq.config';
 import { clerkConfig } from '@config/clerk.config';
 import { databaseConfig } from '@config/database.config';
 import { featuresConfig } from '@config/features.config';
-import { CqrsModule } from '@nestjs/cqrs';
 import { BullModule } from '@nestjs/bullmq';
 import { DatabaseModule } from '../database/database.module';
 import { ClerkModule } from '../clerk/clerk.module';
 import { scopesConfig } from '@config/scopes.config';
 import { ValidationInterceptor } from './interceptors';
+import { CqrsModule } from '../cqrs/cqrs.module';
 
 @Global()
 @Module({

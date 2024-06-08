@@ -1,11 +1,13 @@
 import { BullModule } from '@nestjs/bullmq';
 import { Module } from '@nestjs/common';
 import { JudgeController } from './controllers';
-import { JudgeProcessor } from './processors';
 import { JudgeService } from './services';
 import { ProblemModule } from '@domain/problem/problem.module';
 import { UserModule } from '@domain/user/user.module';
 import { AuthModule } from '@domain/auth/auth.module';
+import { JudgeRepository } from './repositories';
+import { JudgeSaga } from './sagas';
+import { JudgeHandler } from './commands/handlers';
 
 @Module({
   imports: [
@@ -17,6 +19,6 @@ import { AuthModule } from '@domain/auth/auth.module';
     ProblemModule,
   ],
   controllers: [JudgeController],
-  providers: [JudgeProcessor, JudgeService],
+  providers: [JudgeHandler, JudgeRepository, JudgeService, JudgeSaga],
 })
 export class JudgeModule {}

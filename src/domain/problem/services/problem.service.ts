@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ProblemRepository } from '../repositories';
-import { EventBus } from '@nestjs/cqrs';
 import { ProblemCreatedEvent } from '../events';
 import { List, ListRepositoryOptions } from '@lib/modules/database/interfaces';
 import { Problem } from '../schemas';
+import { EventBus } from '@lib/modules/cqrs/event-bus';
 
 @Injectable()
 export class ProblemService {

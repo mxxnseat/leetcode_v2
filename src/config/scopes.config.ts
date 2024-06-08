@@ -24,16 +24,16 @@ const userRole = [
   scopes.problem.delete,
   scopes.problem.retrieve,
   scopes.problem.update,
+  scopes.judge.create,
+  scopes.judge.retrieve,
+  scopes.judge.list,
 ];
 
 const adminRole = [
   ...userRole,
   scopes.problem.updateStatus,
   scopes.problem.listPendings,
-  scopes.judge.create,
-  scopes.judge.list,
   scopes.judge.delete,
-  scopes.judge.retrieve,
 ];
 export const scopesConfig = registerAs('scopes', () => ({
   user: userRole,

@@ -1352,7 +1352,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chai@npm:4.3.16":
+"@types/chai@npm:*, @types/chai@npm:4.3.16":
   version: 4.3.16
   resolution: "@types/chai@npm:4.3.16"
   checksum: 10c0/745d4a9be429d5d86a7ab26064610b8957fe12dd80e94dc7d0707cf3db1c889e3ffe0d73d69bb15e6d376bf4462a7a75e9d8fc1051750b5d656d6cfe459829b7
@@ -1496,7 +1496,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/sinon@npm:17.0.3":
+"@types/sinon-chai@npm:^3":
+  version: 3.2.12
+  resolution: "@types/sinon-chai@npm:3.2.12"
+  dependencies:
+    "@types/chai": "npm:*"
+    "@types/sinon": "npm:*"
+  checksum: 10c0/2d4b865f117226c84d4fae861e702fa02598e2f347823dccb5dcdcf4bcc8a5f60fbf2c028feb34001d569b69ccbb401a42830cf85f4f5f2d0bd6283112b848f1
+  languageName: node
+  linkType: hard
+
+"@types/sinon@npm:*, @types/sinon@npm:17.0.3":
   version: 17.0.3
   resolution: "@types/sinon@npm:17.0.3"
   dependencies:
@@ -4980,6 +4990,7 @@ __metadata:
     "@types/node": "npm:18.16.12"
     "@types/pg": "npm:8"
     "@types/sinon": "npm:17.0.3"
+    "@types/sinon-chai": "npm:^3"
     "@types/supertest": "npm:6.0.2"
     "@types/ws": "npm:8"
     "@typescript-eslint/eslint-plugin": "npm:7.11.0"
@@ -5002,6 +5013,7 @@ __metadata:
     reflect-metadata: "npm:0.2.2"
     rxjs: "npm:7.2.0"
     sinon: "npm:18.0.0"
+    sinon-chai: "npm:3.7.0"
     source-map-support: "npm:0.5.20"
     supertest: "npm:7.0.0"
     svix: "npm:1.24.0"
@@ -7103,6 +7115,16 @@ __metadata:
   version: 4.1.0
   resolution: "signal-exit@npm:4.1.0"
   checksum: 10c0/41602dce540e46d599edba9d9860193398d135f7ff72cab629db5171516cfae628d21e7bfccde1bbfdf11c48726bc2a6d1a8fb8701125852fbfda7cf19c6aa83
+  languageName: node
+  linkType: hard
+
+"sinon-chai@npm:3.7.0":
+  version: 3.7.0
+  resolution: "sinon-chai@npm:3.7.0"
+  peerDependencies:
+    chai: ^4.0.0
+    sinon: ">=4.0.0"
+  checksum: 10c0/9bbb0494be89c313f5287c2a0c9890104e3070ad6bf06c359b0c3cd776ea6273f7846ee1ab01fa2e0328e741f8717348669ee232e83b94b193676a56f48d2c63
   languageName: node
   linkType: hard
 
