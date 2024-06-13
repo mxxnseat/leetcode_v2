@@ -1,12 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { WsAdapter } from '@nestjs/platform-ws';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { randomUUID } from 'crypto';
 import fastifyRequestContext from '@fastify/request-context';
+import { Metadata } from '@lib/metadata';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -20,10 +20,10 @@ async function bootstrap() {
     defaultStoreValues: {
       user: null,
       scopes: [],
+      metadata: new Metadata(),
     },
   });
   app.setGlobalPrefix('v1');
-  app.useWebSocketAdapter(new WsAdapter(app));
   await app.listen(8080);
 }
 bootstrap();

@@ -10,9 +10,9 @@ import {
 import { Test } from '@nestjs/testing';
 import { clearAll } from './core';
 import { AppModule } from 'src/app.module';
-import { WsAdapter } from '@nestjs/platform-ws';
 import { HttpExceptionFilter } from '@lib/modules/core/filters';
 import { EventBus } from '@lib/modules/cqrs/event-bus';
+import { Metadata } from '@lib/metadata/metadata';
 
 chai.use(sinonChai);
 
@@ -37,9 +37,9 @@ export const mochaHooks = {
       defaultStoreValues: {
         user: null,
         scopes: [],
+        metadata: new Metadata(),
       },
     });
-    app.useWebSocketAdapter(new WsAdapter(app));
     app.useGlobalFilters(new HttpExceptionFilter());
     await app.init();
     await app.getHttpAdapter().getInstance().ready();

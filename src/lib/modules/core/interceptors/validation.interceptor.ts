@@ -1,6 +1,3 @@
-import { Value } from '@sinclair/typebox/value';
-
-import { TypeCompiler } from '@sinclair/typebox/compiler';
 import {
   CallHandler,
   ExecutionContext,

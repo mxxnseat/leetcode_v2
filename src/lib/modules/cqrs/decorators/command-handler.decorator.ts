@@ -7,6 +7,8 @@ import { randomUUID } from 'crypto';
 import { QUEUE_NAME } from '../constants';
 import { Processor } from '@nestjs/bullmq';
 
+// TODO: Fix types
+
 export const CommandHandler = (command: ICommand) => {
   return (target: Function) => {
     const queueName = Reflect.getMetadata(QUEUE_NAME, command);

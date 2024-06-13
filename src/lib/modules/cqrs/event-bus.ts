@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import {
+  ICommand,
   IEvent,
   EventBus as NestEventBus,
   UnhandledExceptionBus,
