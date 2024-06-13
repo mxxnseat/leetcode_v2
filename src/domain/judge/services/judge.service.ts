@@ -5,6 +5,7 @@ import { JudgeCreatedEvent, JudgeUpdatedEvent } from '../events';
 import { EventBus } from '@lib/modules/cqrs/event-bus';
 import { List, ListRepositoryOptions } from '@lib/modules/database/interfaces';
 import { diff } from '@lib/utils';
+import { Metadata } from '@lib/metadata';
 
 @Injectable()
 export class JudgeService {
@@ -19,11 +20,10 @@ export class JudgeService {
     return this.judgeRepository.list(options);
   }
 
-  public async create({
-    problem_id,
-    algorithm,
-    user,
-  }: CreateJudgePayload): Promise<Judge> {
+  public async create(
+    { problem_id, algorithm, user }: CreateJudgePayload,
+    metadata: Metadata,
+  ): Promise<Judge> {
     const judge = await this.judgeRepository.create({
       algorithm,
       user,
@@ -31,7 +31,7 @@ export class JudgeService {
       success: false,
       problem: problem_id,
     });
-    this.eventBus.publish(new JudgeCreatedEvent(judge));
+    this.eventBus.publish(new JudgeCreatedEvent(judge, metadata));
     return judge;
   }
 
@@ -42,18 +42,22 @@ export class JudgeService {
   public async update(
     idJudge: string,
     payload: Partial<Judge>,
+    metadata: Metadata,
   ): Promise<Judge | null> {
     const judge = await this.retrieve(idJudge);
+    console.log({ judge });
     if (!judge) {
       return null;
     }
     const updatedJudge = await this.judgeRepository.update(idJudge, payload);
+    console.log({ updatedJudge });
     if (!updatedJudge) {
       return null;
     }
+    console.log({ diff: 123 });
     this.eventBus.publish(
-      new JudgeUpdatedEvent(updatedJudge, diff(judge, updatedJudge)),
+      new JudgeUpdatedEvent(updatedJudge, diff(updatedJudge, judge), metadata),
     );
-    return judge;
+    return updatedJudge;
   }
 }

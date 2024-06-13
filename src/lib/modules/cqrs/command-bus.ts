@@ -5,9 +5,12 @@ import { Queue, QueueOptions } from 'bullmq';
 import { randomUUID } from 'crypto';
 import { BullmqConfig, bullmqConfig } from '@config/bullmq.config';
 import { ModuleRef } from '@nestjs/core';
+import { Command } from './command';
+
+// TODO: FIX TYPES
 
 @Injectable()
-export class CommandBus extends NestCommandBus {
+export class CommandBus extends NestCommandBus<Command> {
   constructor(
     @Inject(bullmqConfig.KEY)
     private readonly bc: BullmqConfig,
@@ -33,9 +36,10 @@ export class CommandBus extends NestCommandBus {
           db: this.bc.db,
         },
       });
+
       const job = await queue.add(randomUUID(), command);
       return job as R;
     }
-    return super.execute(command);
+    return super.execute(command as unknown as Command);
   }
 }

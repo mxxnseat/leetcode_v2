@@ -20,6 +20,7 @@ import { HttpExceptionFilter } from '@lib/modules/core/filters';
 import supertest from 'supertest';
 import TestAgent from 'supertest/lib/agent';
 import { scopesConfig } from '@config/scopes.config';
+import { Metadata } from '@lib/metadata';
 
 @Controller('test')
 class testController {
@@ -54,6 +55,7 @@ describe('AuthProtected', () => {
       defaultStoreValues: {
         user: null,
         scopes: [],
+        metadata: new Metadata(),
       },
     });
     app.useGlobalFilters(new HttpExceptionFilter());

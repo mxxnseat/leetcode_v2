@@ -12,10 +12,13 @@ import { ClerkModule } from '../clerk/clerk.module';
 import { scopesConfig } from '@config/scopes.config';
 import { ValidationInterceptor } from './interceptors';
 import { CqrsModule } from '../cqrs/cqrs.module';
+import { stompConfig } from '@config/stomp.config';
+import { StompModule } from '../stomp/stomp.module';
 
 @Global()
 @Module({
   imports: [
+    StompModule.forRoot(),
     ClerkModule,
     DatabaseModule,
     CqrsModule.forRoot(),
@@ -32,6 +35,7 @@ import { CqrsModule } from '../cqrs/cqrs.module';
         clerkConfig,
         featuresConfig,
         scopesConfig,
+        stompConfig,
       ],
       isGlobal: true,
     }),

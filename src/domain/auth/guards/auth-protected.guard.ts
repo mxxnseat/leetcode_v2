@@ -12,6 +12,7 @@ import { FastifyRequest } from 'fastify';
 import jwt from 'jsonwebtoken';
 import { NotAuthorizedException } from '../exceptions';
 import { ScopesService } from '../services';
+import { Metadata } from '@lib/metadata';
 
 @Injectable()
 export class AuthProtectedGuard implements CanActivate {
@@ -40,6 +41,8 @@ export class AuthProtectedGuard implements CanActivate {
       data: [user],
     } = await this.userService.list({ clerk_user_id: decoded.sub });
     req.requestContext.set('user', user);
+    const metadata = req.requestContext.get('metadata') as Metadata;
+    req.requestContext.set('metadata', metadata.setUser(user.id));
     this.scopesService.attachScopes(
       req,
       this.scopesService.getScopesByRole(user.role),
@@ -55,6 +58,8 @@ export class AuthProtectedGuard implements CanActivate {
     if (!user) {
       throw new NotAuthorizedException();
     }
+    const metadata = req.requestContext.get('metadata') as Metadata;
+    req.requestContext.set('metadata', metadata.setUser(user.id));
     req.requestContext.set('user', user);
     this.scopesService.attachScopes(
       req,

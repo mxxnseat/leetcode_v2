@@ -13,3 +13,34 @@ services:
       - '5555:5432'
     environment:
       POSTGRES_PASSWORD: example
+  rabbitmq:
+    image: rabbitmq:3.13.3
+    ports:
+      - '5671:5671'
+      - '5672:5672'
+      - '15674:15674'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    command: >
+      bash -c "rabbitmq-plugins enable --offline \
+      rabbitmq_mqtt \
+      rabbitmq_management \
+      rabbitmq_stomp \
+      rabbitmq_web_stomp \
+      && rabbitmq-server restart"
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:5672']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+  websocket-relay:
+    image: cloudamqp/websocket-tcp-relay:v1.0.6
+    restart: on-failure
+    ports:
+      - '15670:15670'
+    links:
+      - rabbitmq
+    command: ['--port', '15670', '--upstream', 'tcp://rabbitmq:5672']

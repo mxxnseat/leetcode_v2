@@ -15,10 +15,17 @@ export class JudgeHandler extends WorkerHost<JudgeCommand> {
     super();
   }
 
-  public async execute(command: JudgeCommand): Promise<any> {
-    const problem = await this.problemService.retrieve(command.judge.problem);
+  public async execute({ judge, metadata }: JudgeCommand): Promise<any> {
+    const problem = await this.problemService.retrieve(judge.problem);
     if (!problem) {
-      return;
+      return this.judgeService.update(
+        judge.id,
+        {
+          success: false,
+          failed_reason: 'Problem not found',
+        },
+        metadata,
+      );
     }
     const { stderr, stdout, error } = await new Promise<{
       error: unknown;
@@ -29,7 +36,7 @@ export class JudgeHandler extends WorkerHost<JudgeCommand> {
         `docker run --rm \
           -e PROBLEM_ALGORITHM="${problem.algorithm}" \
           -e INPUT="${problem.inputs}" \
-          -e USER_ALGORITHM="${command.judge.algorithm}" \
+          -e USER_ALGORITHM="${judge.algorithm}" \
           leetcode_v2_node_v20
           `,
         (error, stdout, stderr) => {
@@ -39,27 +46,43 @@ export class JudgeHandler extends WorkerHost<JudgeCommand> {
     });
     const matchResult = stdout.match(/{"execution_result":\s*(.*)}/);
     if (!matchResult) {
-      return this.judgeService.update(command.judge.id, {
-        success: false,
-        failed_reason: 'Cannot find result',
-      });
+      return this.judgeService.update(
+        judge.id,
+        {
+          success: false,
+          failed_reason: 'Cannot find result',
+        },
+        metadata,
+      );
     }
     if (error || stderr) {
-      return this.judgeService.update(command.judge.id, {
-        success: false,
-        failed_reason: error || stderr,
-      });
+      return this.judgeService.update(
+        judge.id,
+        {
+          success: false,
+          failed_reason: error || stderr,
+        },
+        metadata,
+      );
     }
     const result = JSON.parse(matchResult[1]) as ExecutionResult[];
     const isNotValid = result.some(({ isCorrect }) => !isCorrect);
     if (isNotValid) {
-      return this.judgeService.update(command.judge.id, {
-        success: false,
-        failed_reason: JSON.stringify(result),
-      });
+      return this.judgeService.update(
+        judge.id,
+        {
+          success: false,
+          failed_reason: JSON.stringify(result),
+        },
+        metadata,
+      );
     }
-    return this.judgeService.update(command.judge.id, {
-      success: true,
-    });
+    return this.judgeService.update(
+      judge.id,
+      {
+        success: true,
+      },
+      metadata,
+    );
   }
 }

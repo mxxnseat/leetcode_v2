@@ -13,6 +13,7 @@ import { User } from '@domain/user/interfaces';
 import { listResponseSchema } from '@lib/modules/core/schemas';
 import { List } from '@lib/modules/database/interfaces';
 import { NotFoundException } from '@lib/exception';
+import { LeetcodeMetadata, Metadata } from '@lib/metadata';
 
 @Controller('judges')
 @AuthProtected()
@@ -35,8 +36,9 @@ export class JudgeController {
   public async create(
     @Body() payload: CreateJudgeBody,
     @CurrentUser() user: User,
+    @LeetcodeMetadata() metadata: Metadata,
   ): Promise<Judge> {
-    return this.judgeService.create({ ...payload, user: user.id });
+    return this.judgeService.create({ ...payload, user: user.id }, metadata);
   }
 
   @Get(':id_judge')
