@@ -10,7 +10,7 @@ export const createUser = async (
   const [user] = await userRepository
     .insert({
       id,
-      clerk_user_id: faker.string.uuid(),
+      sub: faker.string.uuid(),
       email: faker.internet.email(),
       nickname: faker.internet.userName(),
       role: 'admin',

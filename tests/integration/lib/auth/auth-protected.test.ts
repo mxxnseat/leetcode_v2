@@ -3,7 +3,6 @@ import { AuthProtected, Scopes } from '@domain/auth/decorators';
 import { Test } from '@nestjs/testing';
 import { ConfigModule } from '@nestjs/config';
 import { featuresConfig } from '@config/features.config';
-import { clerkConfig } from '@config/clerk.config';
 import { AuthModule } from '@domain/auth/auth.module';
 import { createUser } from 'tests/integration/seeds';
 import { expect } from 'chai';
@@ -21,6 +20,7 @@ import supertest from 'supertest';
 import TestAgent from 'supertest/lib/agent';
 import { scopesConfig } from '@config/scopes.config';
 import { Metadata } from '@lib/metadata';
+import { auth0Config } from '@config/auth0.config';
 
 @Controller('test')
 class testController {
@@ -40,7 +40,7 @@ describe('AuthProtected', () => {
     const moduleRef = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({
-          load: [clerkConfig, featuresConfig, databaseConfig, scopesConfig],
+          load: [auth0Config, featuresConfig, databaseConfig, scopesConfig],
           isGlobal: true,
         }),
         DatabaseModule,

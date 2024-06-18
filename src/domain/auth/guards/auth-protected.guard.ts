@@ -1,7 +1,5 @@
-import { ClerkConfig, clerkConfig } from '@config/clerk.config';
 import { FeaturesConfig, featuresConfig } from '@config/features.config';
 import { UserService } from '@domain/user/services';
-import { InternalServerErrorException } from '@lib/exception';
 import {
   CanActivate,
   ExecutionContext,
@@ -13,12 +11,13 @@ import jwt from 'jsonwebtoken';
 import { NotAuthorizedException } from '../exceptions';
 import { ScopesService } from '../services';
 import { Metadata } from '@lib/metadata';
+import { Auth0Config, auth0Config } from '@config/auth0.config';
 
 @Injectable()
 export class AuthProtectedGuard implements CanActivate {
   constructor(
-    @Inject(clerkConfig.KEY)
-    private readonly cc: ClerkConfig,
+    @Inject(auth0Config.KEY)
+    private readonly ac: Auth0Config,
     @Inject(featuresConfig.KEY)
     private readonly fc: FeaturesConfig,
     private readonly userService: UserService,
@@ -33,13 +32,12 @@ export class AuthProtectedGuard implements CanActivate {
     if (!token) {
       throw new NotAuthorizedException();
     }
-    if (!this.cc.publishable_key) {
-      throw new InternalServerErrorException();
-    }
-    const decoded = jwt.verify(token, this.cc.public_key as string);
+    // TODO: Check audience
+    const decoded = jwt.verify(token, this.ac.public_key as string);
+    console.log({ decoded });
     const {
       data: [user],
-    } = await this.userService.list({ clerk_user_id: decoded.sub });
+    } = await this.userService.list({ sub: decoded.sub });
     req.requestContext.set('user', user);
     const metadata = req.requestContext.get('metadata') as Metadata;
     req.requestContext.set('metadata', metadata.setUser(user.id));
