@@ -36,7 +36,7 @@ table "users" {
     null = true
     type = varchar(255)
   }
-  column "clerk_user_id" {
+  column "sub" {
     null = false
     type = varchar(64)
   }

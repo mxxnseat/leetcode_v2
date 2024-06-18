@@ -8,7 +8,7 @@ import { Type } from '@sinclair/typebox';
   destination: '/exchanges/problems/problem.created',
   schema: Type.Object(
     {
-      problem: Type.Unsafe(Type.Ref(problemDto)),
+      problem: problemDto,
     },
     { additionalProperties: false, $id: 'problemCreatedEvent' },
   ),

@@ -7,5 +7,5 @@ export interface User {
   nickname: string;
   email: Nullable<string>;
   role: UserRole;
-  clerk_user_id: string;
+  sub: string;
 }

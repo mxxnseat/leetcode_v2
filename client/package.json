@@ -1,0 +1,11 @@
+{
+  "name": "client",
+  "packageManager": "yarn@4.1.1",
+  "type": "module",
+  "scripts": {
+    "start": "node --max-http-header-size=16384000 index.js"
+  },
+  "dependencies": {
+    "auth0-js": "^9.26.1"
+  }
+}
