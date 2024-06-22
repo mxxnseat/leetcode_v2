@@ -1,6 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { UserService } from '@domain/user/services';
-import { randomUUID } from 'crypto';
 import { USER_ROLES } from '@domain/user/constants';
 import { PostSignupBody, postSignupBodyDto } from '../schemas';
 import { Schemas } from '@lib/modules/core/decorators';
@@ -14,7 +13,7 @@ export class AuthController {
   public async register(@Body() body: PostSignupBody): Promise<void> {
     await this.userService.create({
       email: body.email,
-      nickname: randomUUID(),
+      nickname: body.username,
       role: USER_ROLES.USER,
       sub: body.user_id,
     });

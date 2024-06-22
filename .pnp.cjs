@@ -26,7 +26,6 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@cloudamqp/amqp-client", "npm:3.1.1"],\
           ["@faker-js/faker", "npm:8.4.1"],\
           ["@fastify/request-context", "npm:5.1.0"],\
           ["@istanbuljs/nyc-config-typescript", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:1.0.2"],\
@@ -44,7 +43,6 @@ const RAW_RUNTIME_STATE =
           ["@swc-node/register", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:1.9.1"],\
           ["@swc/cli", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:0.3.12"],\
           ["@swc/core", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:1.5.25"],\
-          ["@types/amqplib", "npm:0.10.5"],\
           ["@types/chai", "npm:4.3.16"],\
           ["@types/jsonwebtoken", "npm:9.0.6"],\
           ["@types/mocha", "npm:10.0.6"],\
@@ -496,15 +494,6 @@ const RAW_RUNTIME_STATE =
           ["@babel/helper-string-parser", "npm:7.24.6"],\
           ["@babel/helper-validator-identifier", "npm:7.24.6"],\
           ["to-fast-properties", "npm:2.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@cloudamqp/amqp-client", [\
-      ["npm:3.1.1", {\
-        "packageLocation": "../../.yarn/berry/cache/@cloudamqp-amqp-client-npm-3.1.1-f38a658da8-10c0.zip/node_modules/@cloudamqp/amqp-client/",\
-        "packageDependencies": [\
-          ["@cloudamqp/amqp-client", "npm:3.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1749,16 +1738,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/@tsconfig-node16-npm-1.0.4-b7cb87d859-10c0.zip/node_modules/@tsconfig/node16/",\
         "packageDependencies": [\
           ["@tsconfig/node16", "npm:1.0.4"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/amqplib", [\
-      ["npm:0.10.5", {\
-        "packageLocation": "../../.yarn/berry/cache/@types-amqplib-npm-0.10.5-c9efeece87-10c0.zip/node_modules/@types/amqplib/",\
-        "packageDependencies": [\
-          ["@types/amqplib", "npm:0.10.5"],\
-          ["@types/node", "npm:20.12.12"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6036,7 +6015,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["leetcode_v2", "workspace:."],\
-          ["@cloudamqp/amqp-client", "npm:3.1.1"],\
           ["@faker-js/faker", "npm:8.4.1"],\
           ["@fastify/request-context", "npm:5.1.0"],\
           ["@istanbuljs/nyc-config-typescript", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:1.0.2"],\
@@ -6054,7 +6032,6 @@ const RAW_RUNTIME_STATE =
           ["@swc-node/register", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:1.9.1"],\
           ["@swc/cli", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:0.3.12"],\
           ["@swc/core", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:1.5.25"],\
-          ["@types/amqplib", "npm:0.10.5"],\
           ["@types/chai", "npm:4.3.16"],\
           ["@types/jsonwebtoken", "npm:9.0.6"],\
           ["@types/mocha", "npm:10.0.6"],\

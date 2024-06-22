@@ -20,15 +20,16 @@ services:
       - '5672:5672'
       - '15674:15674'
       - '15672:15672'
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - ./config/rabbitmq/rabbitmq-oauth.conf:/etc/rabbitmq/conf.d/rabbitmq-oauth.conf
+      - ./config/rabbitmq/certs/public.pem:/etc/rabbitmq/certs/oauth-public.pem
+    env_file: './config/rabbitmq/docker.env'
     command: >
       bash -c "rabbitmq-plugins enable --offline \
-      rabbitmq_mqtt \
       rabbitmq_management \
       rabbitmq_stomp \
       rabbitmq_web_stomp \
+      rabbitmq_auth_backend_oauth2 \
       && rabbitmq-server restart"
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:5672']
@@ -36,11 +37,3 @@ services:
       timeout: 5s
       retries: 3
       start_period: 20s
-  websocket-relay:
-    image: cloudamqp/websocket-tcp-relay:v1.0.6
-    restart: on-failure
-    ports:
-      - '15670:15670'
-    links:
-      - rabbitmq
-    command: ['--port', '15670', '--upstream', 'tcp://rabbitmq:5672']

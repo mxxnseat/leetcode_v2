@@ -1,4 +1,3 @@
-import { AMQPWebSocketClient } from '@cloudamqp/amqp-client';
 import { app } from '../../global-hooks';
 import { StompQueue } from '@lib/modules/stomp/decorators';
 import { PublishStompMessageHandler } from '@lib/modules/stomp/commands/handlers';
@@ -9,6 +8,10 @@ import { WebSocket } from 'ws';
 import { getRandomMetadata } from 'tests/integration/core';
 import { Metadata } from '@lib/metadata';
 import { expect } from 'chai';
+import { StompConfig, stompConfig } from '@config/stomp.config';
+import { Client, IStompSocket } from '@stomp/stompjs';
+
+// THE STUPIDEST SUITES
 
 @StompQueue({
   destination: '/exchange/tests/route.key',
@@ -31,31 +34,48 @@ class TestRoutingEvent extends Event {
 
 describe('STOMP', () => {
   let publishStompMessageHandler: PublishStompMessageHandler;
-
+  let client: Client;
   before(async () => {
     publishStompMessageHandler = app.get(PublishStompMessageHandler);
-    global.WebSocket = WebSocket;
+    const sc = app.get(stompConfig.KEY) as StompConfig;
+    client = new Client({
+      brokerURL: 'ws://127.0.0.1:15674/ws',
+      connectHeaders: {
+        host: sc.vhost,
+        login: sc.login,
+        passcode: sc.passcode,
+      },
+    });
+    client.webSocketFactory = () =>
+      new WebSocket('ws://127.0.0.1:15674/ws') as IStompSocket;
+  });
+
+  beforeEach(() => {
+    client.activate();
+  });
+
+  afterEach(() => {
+    client.deactivate();
   });
 
   it('client should retrieve data from destination', async function () {
     const testEvent = new TestEvent(getRandomMetadata());
-    const amqpClient = new AMQPWebSocketClient(
-      'ws://localhost:15670',
-      '/',
-      'guest',
-      'guest',
-    );
-    const amqpConnection = await amqpClient.connect();
-    const channel = await amqpConnection.channel();
-    const queue = await channel.queue('', { exclusive: true });
-    await queue.bind('tests', 'route.key');
-    const consumer = await queue.subscribe({ noAck: false }, () =>
-      consumer.cancel(),
-    );
+    // STUPID
+    let resolve;
+    client.onConnect = () => {
+      client.subscribe('/exchange/tests/route.key', () => {
+        resolve();
+      });
+    };
+    await new Promise((resolve) => {
+      setTimeout(resolve, 100);
+    });
     await publishStompMessageHandler.execute(
       new PublishStompMessageCommand(testEvent, testEvent.metadata),
     );
-    await consumer.wait();
+    await new Promise((res) => {
+      resolve = res;
+    });
   });
 
   it('client should retrieve data from destination using route key', async () => {
@@ -67,24 +87,19 @@ describe('STOMP', () => {
       { hello: 'invisible' },
       getRandomMetadata(),
     );
+    let resolve;
+    client.onConnect = () => {
+      client.subscribe(
+        `/exchange/tests/users.${subscribedTestRoutingEvent.metadata.user}`,
+        (msg) => {
+          expect(JSON.parse(msg.body).data).property('hello').eq('world');
+          resolve();
+        },
+      );
+    };
 
-    const amqpClient = new AMQPWebSocketClient(
-      'ws://localhost:15670',
-      '/',
-      'guest',
-      'guest',
-    );
-    const amqpConnection = await amqpClient.connect();
-    const channel = await amqpConnection.channel();
-    const queue = await channel.queue('', { exclusive: true });
-    await queue.bind(
-      'tests',
-      `users.${subscribedTestRoutingEvent.metadata.user}`,
-    );
-    const consumer = await queue.subscribe({ noAck: false }, async (msg) => {
-      const message = JSON.parse(msg.bodyToString() as string);
-      expect(message.data).property('hello').eq('world');
-      await consumer.cancel();
+    await new Promise((resolve) => {
+      setTimeout(resolve, 100);
     });
     await Promise.all([
       publishStompMessageHandler.execute(
@@ -100,10 +115,8 @@ describe('STOMP', () => {
         ),
       ),
     ]);
-    await consumer.wait();
-  });
-
-  after(() => {
-    global.WebSocket = undefined;
+    await new Promise((res) => {
+      resolve = res;
+    });
   });
 });
