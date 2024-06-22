@@ -3,10 +3,9 @@ import { Problem, problemDto } from '../schemas';
 import { Event } from '@lib/modules/cqrs/event';
 import { StompQueue } from '@lib/modules/stomp/decorators';
 import { Type } from '@sinclair/typebox';
-import { Expose } from 'class-transformer';
 
 @StompQueue({
-  destination: '/exchanges/problems/problem.updated',
+  destination: '/exchange/problems/problem.updated',
   schema: Type.Object(
     {
       problem: Type.Unsafe(Type.Ref(problemDto)),

@@ -347,13 +347,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cloudamqp/amqp-client@npm:3.1.1":
-  version: 3.1.1
-  resolution: "@cloudamqp/amqp-client@npm:3.1.1"
-  checksum: 10c0/e9420ca31cc309992f5d1aa2f2faafd2aa8d2e7dfa9d0481c74167931069f0c565a504bda03a1b4fa431110f906945123c3a29684fe4c409f00295babb5597b4
-  languageName: node
-  linkType: hard
-
 "@colors/colors@npm:1.5.0":
   version: 1.5.0
   resolution: "@colors/colors@npm:1.5.0"
@@ -1274,15 +1267,6 @@ __metadata:
   version: 1.0.4
   resolution: "@tsconfig/node16@npm:1.0.4"
   checksum: 10c0/05f8f2734e266fb1839eb1d57290df1664fe2aa3b0fdd685a9035806daa635f7519bf6d5d9b33f6e69dd545b8c46bd6e2b5c79acb2b1f146e885f7f11a42a5bb
-  languageName: node
-  linkType: hard
-
-"@types/amqplib@npm:^0":
-  version: 0.10.5
-  resolution: "@types/amqplib@npm:0.10.5"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10c0/758f1d337e9e65ff6596d002e96b342275386aedfc2e7a2440915543885f3aa3b43995c480f339d25ee780b44af96dba95fd7e792eeaa58d9f84b742f9a98dd8
   languageName: node
   linkType: hard
 
@@ -4905,7 +4889,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "leetcode_v2@workspace:."
   dependencies:
-    "@cloudamqp/amqp-client": "npm:3.1.1"
     "@faker-js/faker": "npm:8.4.1"
     "@fastify/request-context": "npm:5.1.0"
     "@istanbuljs/nyc-config-typescript": "npm:1.0.2"
@@ -4923,7 +4906,6 @@ __metadata:
     "@swc-node/register": "npm:1.9.1"
     "@swc/cli": "npm:0.3.12"
     "@swc/core": "npm:1.5.25"
-    "@types/amqplib": "npm:^0"
     "@types/chai": "npm:4.3.16"
     "@types/jsonwebtoken": "npm:^9"
     "@types/mocha": "npm:10.0.6"

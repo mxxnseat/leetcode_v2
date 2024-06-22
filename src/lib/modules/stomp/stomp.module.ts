@@ -5,6 +5,7 @@ import { StompConfig, stompConfig } from '@config/stomp.config';
 import { WebSocket } from 'ws';
 import { EventMapperSaga } from './sagas';
 import { PublishStompMessageHandler } from './commands/handlers';
+import { StompConnectError } from './errors';
 
 @Module({})
 export class StompModule implements OnModuleDestroy {
@@ -16,7 +17,17 @@ export class StompModule implements OnModuleDestroy {
           provide: STOMP_CLIENT,
           inject: [stompConfig.KEY],
           useFactory: (sc: StompConfig) => {
-            const client = new Client({});
+            const client = new Client({
+              connectHeaders: {
+                login: sc.login,
+                passcode: sc.passcode,
+                host: sc.vhost,
+              },
+            });
+            client.onStompError = async (frame) => {
+              await client.deactivate();
+              throw new StompConnectError(frame.headers['message'], frame.body);
+            };
             client.webSocketFactory = () =>
               new WebSocket(sc.brokerUrl) as IStompSocket;
             client.activate();

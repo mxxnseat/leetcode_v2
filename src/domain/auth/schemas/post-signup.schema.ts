@@ -1,7 +1,7 @@
 import { Static, Type } from '@sinclair/typebox';
 
 export const postSignupBodyDto = Type.Object(
-  { email: Type.String(), user_id: Type.String() },
+  { email: Type.String(), user_id: Type.String(), username: Type.String() },
   { $id: 'postSignupBody', additionalProperties: false },
 );
 

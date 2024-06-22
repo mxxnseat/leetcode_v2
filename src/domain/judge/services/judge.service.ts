@@ -50,11 +50,9 @@ export class JudgeService {
       return null;
     }
     const updatedJudge = await this.judgeRepository.update(idJudge, payload);
-    console.log({ updatedJudge });
     if (!updatedJudge) {
       return null;
     }
-    console.log({ diff: 123 });
     this.eventBus.publish(
       new JudgeUpdatedEvent(updatedJudge, diff(updatedJudge, judge), metadata),
     );

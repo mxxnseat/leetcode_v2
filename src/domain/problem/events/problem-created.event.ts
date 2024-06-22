@@ -5,7 +5,7 @@ import { StompQueue } from '@lib/modules/stomp/decorators';
 import { Type } from '@sinclair/typebox';
 
 @StompQueue({
-  destination: '/exchanges/problems/problem.created',
+  destination: '/exchange/problems/problem.created',
   schema: Type.Object(
     {
       problem: problemDto,
