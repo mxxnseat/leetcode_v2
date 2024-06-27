@@ -1,4 +1,4 @@
-import { app } from '../../global-hooks';
+import { app, sinonSandbox } from '../../global-hooks';
 import { StompQueue } from '@lib/modules/stomp/decorators';
 import { PublishStompMessageHandler } from '@lib/modules/stomp/commands/handlers';
 import { Type } from '@sinclair/typebox';
@@ -115,6 +115,37 @@ describe('STOMP', () => {
         ),
       ),
     ]);
+    await new Promise((res) => {
+      resolve = res;
+    });
+  });
+
+  it('should handle a lot messages', async function () {
+    this.timeout(20000);
+    const testEvent = new TestEvent(getRandomMetadata());
+    let resolve;
+    const subscribeCb = sinonSandbox.spy();
+    client.onConnect = () => {
+      client.subscribe(`/exchange/tests/route.key`, () => {
+        subscribeCb();
+        if (subscribeCb.callCount === 50000) {
+          resolve();
+        }
+      });
+    };
+
+    await new Promise((resolve) => {
+      setTimeout(resolve, 100);
+    });
+    await Promise.all(
+      Array(50000)
+        .fill(undefined)
+        .map(() =>
+          publishStompMessageHandler.execute(
+            new PublishStompMessageCommand(testEvent, testEvent.metadata),
+          ),
+        ),
+    );
     await new Promise((res) => {
       resolve = res;
     });
