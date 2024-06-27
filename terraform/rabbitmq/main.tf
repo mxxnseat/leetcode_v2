@@ -47,3 +47,14 @@ resource "rabbitmq_exchange" "problems" {
   }
 }
 
+resource "rabbitmq_exchange" "comments" {
+  name  = "comments"
+  vhost = rabbitmq_permissions.admin.vhost
+
+  settings {
+    type        = "direct"
+    durable     = true
+    auto_delete = false
+  }
+}
+

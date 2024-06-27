@@ -16,6 +16,12 @@ export const scopes = {
     retrieve: 'judges:retrieve',
     delete: 'judges:delete',
   },
+  comment: {
+    list: 'comments:list',
+    create: 'comments:create',
+    update: 'comments:update',
+    delete: 'comments:delete',
+  },
 } as const;
 
 const userRole = [
@@ -27,6 +33,10 @@ const userRole = [
   scopes.judge.create,
   scopes.judge.retrieve,
   scopes.judge.list,
+  scopes.comment.create,
+  scopes.comment.list,
+  scopes.comment.delete,
+  scopes.comment.update,
 ];
 
 const adminRole = [

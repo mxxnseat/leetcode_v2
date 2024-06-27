@@ -66,6 +66,7 @@ export class ProblemController {
       {
         ...payload,
         created_by: user.id,
+        status: 'pending',
       },
       metadata,
     );
@@ -112,8 +113,11 @@ export class ProblemController {
   @Delete(':id_problem')
   @Scopes([leetcodeScopes.problem.delete])
   @HttpCode(204)
-  public async delete(@Param('id_problem') idProblem: string): Promise<void> {
-    const problem = await this.problemService.delete(idProblem);
+  public async delete(
+    @Param('id_problem') idProblem: string,
+    @LeetcodeMetadata() metadata: Metadata,
+  ): Promise<void> {
+    const problem = await this.problemService.delete(idProblem, metadata);
     if (!problem) {
       throw new NotFoundException();
     }
