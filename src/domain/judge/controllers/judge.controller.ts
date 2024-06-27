@@ -38,7 +38,16 @@ export class JudgeController {
     @CurrentUser() user: User,
     @LeetcodeMetadata() metadata: Metadata,
   ): Promise<Judge> {
-    return this.judgeService.create({ ...payload, user: user.id }, metadata);
+    return this.judgeService.create(
+      {
+        algorithm: payload.algorithm,
+        success: false,
+        user: user.id,
+        failed_reason: null,
+        problem: payload.problem_id,
+      },
+      metadata,
+    );
   }
 
   @Get(':id_judge')

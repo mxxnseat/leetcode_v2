@@ -165,3 +165,47 @@ table "judges" {
     on_delete   = CASCADE
   }
 }
+
+table "comments" {
+  schema = schema.public
+  column "id" {
+    null = false
+    type = varchar(64)
+  }
+  column "problem" {
+    null = false
+    type = varchar(64)
+  }
+  column "text" {
+    null = false
+    type = text
+  }
+  column "created_by" {
+    null = false
+    type = varchar(64)
+  }
+  column "created_at" {
+    null    = false
+    type    = integer
+    default = sql("get_timestamp()")
+  }
+  column "updated_at" {
+    null    = false
+    type    = integer
+    default = sql("get_timestamp()")
+  }
+
+  primary_key {
+    columns = [column.id]
+  }
+  foreign_key "problem" {
+    columns     = [column.problem]
+    ref_columns = [table.problems.column.id]
+    on_delete   = CASCADE
+  }
+  foreign_key "created_by" {
+    columns     = [column.created_by]
+    ref_columns = [table.users.column.id]
+    on_delete   = CASCADE
+  }
+}

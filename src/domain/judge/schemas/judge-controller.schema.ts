@@ -9,6 +9,3 @@ export const createJudgeBodyDto = Type.Object(
 );
 
 export type CreateJudgeBody = Static<typeof createJudgeBodyDto>;
-export interface CreateJudgePayload extends CreateJudgeBody {
-  user: string;
-}

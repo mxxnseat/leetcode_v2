@@ -1,7 +1,6 @@
-import SinonChai from 'sinon-chai';
 import { faker } from '@faker-js/faker';
 import { EventBus } from '@lib/modules/cqrs/event-bus';
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 import { app, request } from 'tests/integration/global-hooks';
 import { createProblem, createUser } from 'tests/integration/seeds';
 import { JudgeCreatedEvent } from '@domain/judge/events';
