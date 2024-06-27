@@ -20,8 +20,8 @@ resource "rabbitmq_exchange" "tests" {
 
   settings {
     type        = "topic"
-    durable     = false
-    auto_delete = true
+    durable     = true
+    auto_delete = false
   }
 }
 
