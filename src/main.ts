@@ -7,6 +7,7 @@ import {
 import { randomUUID } from 'crypto';
 import fastifyRequestContext from '@fastify/request-context';
 import { Metadata } from '@lib/metadata';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -14,7 +15,7 @@ async function bootstrap() {
     new FastifyAdapter({
       genReqId: () => randomUUID(),
     }),
-    { rawBody: true },
+    { rawBody: true, bufferLogs: true },
   );
   app.register(fastifyRequestContext as any, {
     defaultStoreValues: {
@@ -23,6 +24,7 @@ async function bootstrap() {
       metadata: new Metadata(),
     },
   });
+  app.useLogger(app.get(Logger));
   app.setGlobalPrefix('v1');
   await app.listen(8080);
 }

@@ -67,9 +67,13 @@ const RAW_RUNTIME_STATE =
           ["jsonwebtoken", "npm:9.0.2"],\
           ["knex", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:3.1.0"],\
           ["mocha", "npm:10.4.0"],\
+          ["nestjs-pino", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:4.1.0"],\
           ["nyc", "npm:15.1.0"],\
           ["pg", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:8.11.5"],\
           ["pg-hstore", "npm:2.3.4"],\
+          ["pino", "npm:9.2.0"],\
+          ["pino-http", "npm:10.1.0"],\
+          ["pino-pretty", "npm:11.2.1"],\
           ["prettier", "npm:2.3.2"],\
           ["reflect-metadata", "npm:0.2.2"],\
           ["rxjs", "npm:7.2.0"],\
@@ -3597,6 +3601,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["dateformat", [\
+      ["npm:4.6.3", {\
+        "packageLocation": "../../.yarn/berry/cache/dateformat-npm-4.6.3-aa1a4cb7f9-10c0.zip/node_modules/dateformat/",\
+        "packageDependencies": [\
+          ["dateformat", "npm:4.6.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["debug", [\
       ["npm:4.3.4", {\
         "packageLocation": "../../.yarn/berry/cache/debug-npm-4.3.4-4513954577-10c0.zip/node_modules/debug/",\
@@ -4368,6 +4381,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/fast-content-type-parse-npm-1.1.0-035173e566-10c0.zip/node_modules/fast-content-type-parse/",\
         "packageDependencies": [\
           ["fast-content-type-parse", "npm:1.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["fast-copy", [\
+      ["npm:3.0.2", {\
+        "packageLocation": "../../.yarn/berry/cache/fast-copy-npm-3.0.2-d747bd131f-10c0.zip/node_modules/fast-copy/",\
+        "packageDependencies": [\
+          ["fast-copy", "npm:3.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5198,6 +5220,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["help-me", [\
+      ["npm:5.0.0", {\
+        "packageLocation": "../../.yarn/berry/cache/help-me-npm-5.0.0-6239bd310f-10c0.zip/node_modules/help-me/",\
+        "packageDependencies": [\
+          ["help-me", "npm:5.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["hexoid", [\
       ["npm:1.0.0", {\
         "packageLocation": "../../.yarn/berry/cache/hexoid-npm-1.0.0-2274609209-10c0.zip/node_modules/hexoid/",\
@@ -5746,6 +5777,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["joycon", [\
+      ["npm:3.1.1", {\
+        "packageLocation": "../../.yarn/berry/cache/joycon-npm-3.1.1-3033e0e5f4-10c0.zip/node_modules/joycon/",\
+        "packageDependencies": [\
+          ["joycon", "npm:3.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["js-tokens", [\
       ["npm:4.0.0", {\
         "packageLocation": "../../.yarn/berry/cache/js-tokens-npm-4.0.0-0ac852e9e2-10c0.zip/node_modules/js-tokens/",\
@@ -6056,9 +6096,13 @@ const RAW_RUNTIME_STATE =
           ["jsonwebtoken", "npm:9.0.2"],\
           ["knex", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:3.1.0"],\
           ["mocha", "npm:10.4.0"],\
+          ["nestjs-pino", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:4.1.0"],\
           ["nyc", "npm:15.1.0"],\
           ["pg", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:8.11.5"],\
           ["pg-hstore", "npm:2.3.4"],\
+          ["pino", "npm:9.2.0"],\
+          ["pino-http", "npm:10.1.0"],\
+          ["pino-pretty", "npm:11.2.1"],\
           ["prettier", "npm:2.3.2"],\
           ["reflect-metadata", "npm:0.2.2"],\
           ["rxjs", "npm:7.2.0"],\
@@ -6747,6 +6791,32 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/neo-async-npm-2.6.2-75d6902586-10c0.zip/node_modules/neo-async/",\
         "packageDependencies": [\
           ["neo-async", "npm:2.6.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["nestjs-pino", [\
+      ["npm:4.1.0", {\
+        "packageLocation": "./.yarn/unplugged/nestjs-pino-virtual-8cfc9b8cc7/node_modules/nestjs-pino/",\
+        "packageDependencies": [\
+          ["nestjs-pino", "npm:4.1.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:4.1.0", {\
+        "packageLocation": "./.yarn/unplugged/nestjs-pino-virtual-8cfc9b8cc7/node_modules/nestjs-pino/",\
+        "packageDependencies": [\
+          ["nestjs-pino", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:4.1.0"],\
+          ["@nestjs/common", "virtual:bb2cbd9e7152f66f9ae3dd33591e9dfaef6919c39b12d4915ba741a33c402e614cb6a5c46c66b6e9ec92ab559ce18b8e3cde66cc2bdd3abb80cdfd4a5a5f838a#npm:10.3.8"],\
+          ["@types/nestjs__common", null],\
+          ["@types/pino-http", null],\
+          ["pino-http", "npm:10.1.0"]\
+        ],\
+        "packagePeers": [\
+          "@nestjs/common",\
+          "@types/nestjs__common",\
+          "@types/pino-http",\
+          "pino-http"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7513,6 +7583,24 @@ const RAW_RUNTIME_STATE =
           ["thread-stream", "npm:3.0.2"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:9.2.0", {\
+        "packageLocation": "../../.yarn/berry/cache/pino-npm-9.2.0-dc3662cd9b-10c0.zip/node_modules/pino/",\
+        "packageDependencies": [\
+          ["pino", "npm:9.2.0"],\
+          ["atomic-sleep", "npm:1.0.0"],\
+          ["fast-redact", "npm:3.5.0"],\
+          ["on-exit-leak-free", "npm:2.1.2"],\
+          ["pino-abstract-transport", "npm:1.2.0"],\
+          ["pino-std-serializers", "npm:7.0.0"],\
+          ["process-warning", "npm:3.0.0"],\
+          ["quick-format-unescaped", "npm:4.0.4"],\
+          ["real-require", "npm:0.2.0"],\
+          ["safe-stable-stringify", "npm:2.4.3"],\
+          ["sonic-boom", "npm:4.0.1"],\
+          ["thread-stream", "npm:3.0.2"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["pino-abstract-transport", [\
@@ -7522,6 +7610,42 @@ const RAW_RUNTIME_STATE =
           ["pino-abstract-transport", "npm:1.2.0"],\
           ["readable-stream", "npm:4.5.2"],\
           ["split2", "npm:4.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pino-http", [\
+      ["npm:10.1.0", {\
+        "packageLocation": "../../.yarn/berry/cache/pino-http-npm-10.1.0-e93404f012-10c0.zip/node_modules/pino-http/",\
+        "packageDependencies": [\
+          ["pino-http", "npm:10.1.0"],\
+          ["get-caller-file", "npm:2.0.5"],\
+          ["pino", "npm:9.1.0"],\
+          ["pino-std-serializers", "npm:7.0.0"],\
+          ["process-warning", "npm:3.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["pino-pretty", [\
+      ["npm:11.2.1", {\
+        "packageLocation": "../../.yarn/berry/cache/pino-pretty-npm-11.2.1-c01fdb342c-10c0.zip/node_modules/pino-pretty/",\
+        "packageDependencies": [\
+          ["pino-pretty", "npm:11.2.1"],\
+          ["colorette", "npm:2.0.20"],\
+          ["dateformat", "npm:4.6.3"],\
+          ["fast-copy", "npm:3.0.2"],\
+          ["fast-safe-stringify", "npm:2.1.1"],\
+          ["help-me", "npm:5.0.0"],\
+          ["joycon", "npm:3.1.1"],\
+          ["minimist", "npm:1.2.8"],\
+          ["on-exit-leak-free", "npm:2.1.2"],\
+          ["pino-abstract-transport", "npm:1.2.0"],\
+          ["pump", "npm:3.0.0"],\
+          ["readable-stream", "npm:4.5.2"],\
+          ["secure-json-parse", "npm:2.7.0"],\
+          ["sonic-boom", "npm:4.0.1"],\
+          ["strip-json-comments", "npm:3.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\

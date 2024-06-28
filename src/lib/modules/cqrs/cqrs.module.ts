@@ -1,9 +1,10 @@
 import { DynamicModule, Module, OnApplicationBootstrap } from '@nestjs/common';
 import { CommandBus } from './command-bus';
-import { QueryBus, UnhandledExceptionBus, IEvent } from '@nestjs/cqrs';
+import { UnhandledExceptionBus, IEvent } from '@nestjs/cqrs';
 import { ExplorerService } from '@nestjs/cqrs/dist/services/explorer.service';
 import { EventBus } from './event-bus';
 import { EventPublisher } from './event-publisher';
+import { Event } from './event';
 
 @Module({
   providers: [
@@ -15,7 +16,7 @@ import { EventPublisher } from './event-publisher';
   ],
   exports: [CommandBus, EventBus, UnhandledExceptionBus, EventPublisher],
 })
-export class CqrsModule<EventBase extends IEvent = IEvent>
+export class CqrsModule<EventBase extends Event = Event>
   implements OnApplicationBootstrap
 {
   static forRoot(): DynamicModule {

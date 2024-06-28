@@ -13,8 +13,13 @@ import { AppModule } from 'src/app.module';
 import { HttpExceptionFilter } from '@lib/modules/core/filters';
 import { EventBus } from '@lib/modules/cqrs/event-bus';
 import { Metadata } from '@lib/metadata/metadata';
+import { LoggerModule } from '@lib/modules/logger/logger.module';
+import { Module } from '@nestjs/common';
 
 chai.use(sinonChai);
+
+@Module({})
+class MockLoggerModule {}
 
 export let sinonSandbox = createSandbox();
 export let app: NestFastifyApplication;
@@ -26,7 +31,7 @@ export const mochaHooks = {
     });
     const stubEventBus = sinonSandbox.createStubInstance(EventBus);
     moduleRef.overrideProvider(EventBus).useValue(stubEventBus);
-
+    moduleRef.overrideModule(LoggerModule).useModule(MockLoggerModule);
     app = (await moduleRef.compile()).createNestApplication(
       new FastifyAdapter(),
       {

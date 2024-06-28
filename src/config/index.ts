@@ -1,3 +1,4 @@
+export * from './app.config';
 export * from './auth0.config';
 export * from './bullmq.config';
 export * from './database.config';
