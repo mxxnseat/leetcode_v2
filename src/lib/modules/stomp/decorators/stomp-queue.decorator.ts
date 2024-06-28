@@ -7,6 +7,7 @@ export const StompQueue =
     return class extends target {
       constructor(...args: any[]) {
         super(...args);
+        Object.defineProperty(this.constructor, 'name', { value: target.name });
         let match = '';
         let destination = options.destination;
         for (const ch of options.destination) {

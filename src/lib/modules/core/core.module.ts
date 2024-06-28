@@ -8,17 +8,20 @@ import { featuresConfig } from '@config/features.config';
 import { BullModule } from '@nestjs/bullmq';
 import { DatabaseModule } from '../database/database.module';
 import { scopesConfig } from '@config/scopes.config';
-import { ValidationInterceptor } from './interceptors';
+import { RequestInterceptor, ValidationInterceptor } from './interceptors';
 import { CqrsModule } from '../cqrs/cqrs.module';
 import { stompConfig } from '@config/stomp.config';
 import { StompModule } from '../stomp/stomp.module';
 import { auth0Config } from '@config/auth0.config';
+import { appConfig } from '@config/app.config';
+import { LoggerModule } from '../logger/logger.module';
 
 @Global()
 @Module({
   imports: [
     StompModule.forRoot(),
     DatabaseModule,
+    LoggerModule,
     CqrsModule.forRoot(),
     BullModule.forRootAsync({
       inject: [bullmqConfig.KEY],
@@ -28,6 +31,7 @@ import { auth0Config } from '@config/auth0.config';
     }),
     ConfigModule.forRoot({
       load: [
+        appConfig,
         databaseConfig,
         bullmqConfig,
         featuresConfig,
@@ -41,6 +45,10 @@ import { auth0Config } from '@config/auth0.config';
   providers: [
     { provide: APP_FILTER, useClass: HttpExceptionFilter },
     { provide: APP_FILTER, useClass: ErrorExceptionFilter },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: RequestInterceptor,
+    },
     {
       provide: APP_INTERCEPTOR,
       useClass: ValidationInterceptor,
