@@ -6,8 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "TS_NODE_PROJECT=tsconfig.build.json nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "leetcode": "node -r ./.pnp.cjs --enable-source-maps -r ts-node/register -r tsconfig-paths/register ./dist/main.js",
     "start": "nest start",
     "start:dev": "NODE_OPTIONS='--require ./.pnp.cjs --enable-source-maps -r ts-node/register --require tsconfig-paths/register' nest start --watch",
     "start:debug": "nest start --debug --watch",

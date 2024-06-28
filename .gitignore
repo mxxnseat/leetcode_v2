@@ -1,5 +1,8 @@
 ngrok.yml
 
+# Clinic output
+.clinic
+
 # compiled output
 /dist
 /node_modules
